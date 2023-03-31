@@ -9,6 +9,11 @@ Generate and keep your MongoDB Schema Validation up-to-date based on your types!
 Types are/should be always up-to-date in order to enable proper Typescript usage.      
 This library' aim is to automate the mundayne task of keeping the MongoDB Schema Validation in sync with your API or various services types. 
 
+### Installing
+
+```
+npm install --save mongrr-schema
+```
 
 ### Usage
 
