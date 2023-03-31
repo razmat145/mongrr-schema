@@ -49,7 +49,7 @@ async function main() {
     await client.connect();
 
     await Generator.generate({
-        files: ['../../models/Entity.ts'],
+        files: ['../targetFiles/User.ts'],
         callerBaseDir: __dirname,
         includeNestedClassNames: true,
         includeOnlyDefaultExports: true,
