@@ -1,0 +1,42 @@
+[
+    {
+        "name": "User",
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "number",
+                "required": true
+            },
+            "phone": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                },
+                "required": false
+            },
+            "address": {
+                "type": "object",
+                "properties": {
+                    "street": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "county": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "flatNumber": {
+                        "type": "number",
+                        "required": false
+                    }
+                },
+                "name": "Address",
+                "required": true
+            },
+            "active": {
+                "type": "boolean",
+                "required": true
+            }
+        }
+    }
+]

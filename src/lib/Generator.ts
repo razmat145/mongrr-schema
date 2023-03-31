@@ -18,8 +18,10 @@ class Generator {
         const typeDescription = await Parserr.parse(
             Session.getTParserrOpts()
         );
+        console.error(JSON.stringify(typeDescription));
 
-        const schema = await Schema.transform(typeDescription);
+        const schema = Schema.transform(typeDescription);
+        console.error(JSON.stringify(schema));
 
         await Collection.generate(schema);
     }

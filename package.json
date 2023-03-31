@@ -1,6 +1,6 @@
 {
   "name": "mongrr-schema",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "Mongo Schema Generator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "clean": "rimraf dist/",
-    "build": "npm run clean && npm run compile"
+    "build": "npm run clean && npm run compile",
+    "test": "jest"
   },
   "author": "Razvan Matei (monakyo@gmail.com)",
   "license": "Apache-2.0",
@@ -19,11 +20,15 @@
     "tparserr": "^1.0.9"
   },
   "devDependencies": {
+    "@jest/globals": "^29.5.0",
+    "@types/lodash": "^4.14.192",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
     "eslint": "^8.37.0",
+    "jest": "^29.5.0",
     "pre-commit": "^1.2.2",
     "rimraf": "^4.4.1",
+    "ts-jest": "^29.0.5",
     "typescript": "^5.0.3"
   },
   "repository": {
