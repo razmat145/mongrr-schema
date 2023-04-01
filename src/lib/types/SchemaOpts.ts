@@ -2,7 +2,7 @@
 import ISchemaObject from './ISchemaObject';
 
 export interface ISchemaOpts {
-    collectionName?: string;
+    collectionName: string;
 
     schema: ISchemaObject;
 }

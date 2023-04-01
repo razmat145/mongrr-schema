@@ -1,7 +1,7 @@
 
 import { describe, it, expect } from '@jest/globals';
 
-import SchemaBuilder from '../../src/lib/mongo/schema/Builder';
+import SchemaBuilder from '../../../src/lib/mongo/schema/Builder';
 
 import ParserOutput from './files/ParserOutput.json';
 import TransformedMongoSchema from './files/TransformedMongoSchema.json';

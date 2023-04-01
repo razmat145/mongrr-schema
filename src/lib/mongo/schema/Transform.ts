@@ -11,8 +11,10 @@ import { ISchemaOpts } from '../../types/SchemaOpts';
 
 class Transform {
 
-    public transform(typeDescription: ITypeDescription): ISchemaOpts {
-        return { schema: this.transformToSchema(typeDescription) };
+    public transform(typeDescription: ITypeDescription): Partial<ISchemaOpts> {
+        return {
+            schema: this.transformToSchema(typeDescription)
+        };
     }
 
     private transformToSchema(typeDescription: ITypeDescription): ISchemaObject {
