@@ -1,44 +1,46 @@
 [
     {
-        "bsonType": "object",
-        "title": "User",
-        "properties": {
-            "id": {
-                "bsonType": "number"
-            },
-            "phone": {
-                "bsonType": "array",
-                "items": {
-                    "bsonType": "string"
-                }
-            },
-            "address": {
-                "bsonType": "object",
-                "title": "Address",
-                "properties": {
-                    "street": {
+        "schema": {
+            "bsonType": "object",
+            "title": "User",
+            "properties": {
+                "id": {
+                    "bsonType": "number"
+                },
+                "phone": {
+                    "bsonType": "array",
+                    "items": {
                         "bsonType": "string"
-                    },
-                    "county": {
-                        "bsonType": "string"
-                    },
-                    "flatNumber": {
-                        "bsonType": "number"
                     }
                 },
-                "required": [
-                    "street",
-                    "county"
-                ]
+                "address": {
+                    "bsonType": "object",
+                    "title": "Address",
+                    "properties": {
+                        "street": {
+                            "bsonType": "string"
+                        },
+                        "county": {
+                            "bsonType": "string"
+                        },
+                        "flatNumber": {
+                            "bsonType": "number"
+                        }
+                    },
+                    "required": [
+                        "street",
+                        "county"
+                    ]
+                },
+                "active": {
+                    "bsonType": "bool"
+                }
             },
-            "active": {
-                "bsonType": "bool"
-            }
-        },
-        "required": [
-            "id",
-            "address",
-            "active"
-        ]
+            "required": [
+                "id",
+                "address",
+                "active"
+            ]
+        }
     }
 ]

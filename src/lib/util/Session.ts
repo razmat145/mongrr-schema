@@ -4,7 +4,7 @@ import { Db } from 'mongodb';
 
 import { IParserOpts } from 'tparserr';
 
-import IGeneratorOpts from '../types/IGeneratorOpts';
+import { IGeneratorOpts } from '../types/IGeneratorOpts';
 
 
 class Session {
@@ -37,15 +37,21 @@ class Session {
 
     public getTParserrOpts(): IParserOpts {
         return _.pick(this.opts, [
-            'files', 'useRelativePaths', 'callerBaseDir',
-            'targetDir', 'includeOnlyDefaultExports', 'includeNestedClassNames'
+            'files',
+            'useRelativePaths',
+            'callerBaseDir',
+            'targetDir',
+            'includeOnlyExports',
+            'includeNestedClassNames',
+            'enableDecorators'
         ]);
     }
 
     private getConfigDefaults(): Partial<IGeneratorOpts> {
         return {
-            includeOnlyDefaultExports: true,
-            includeNestedClassNames: true
+            includeOnlyExports: true,
+            includeNestedClassNames: true,
+            enableDecorators: true
         };
     }
 

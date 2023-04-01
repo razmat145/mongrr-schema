@@ -1,12 +1,13 @@
 
+import _ from 'lodash';
 import { Parserr } from 'tparserr';
 
-import Schema from './mongo/Schema';
+import SchemaBuilder from './mongo/schema/Builder';
 import Collection from './mongo/Collection';
 
 import Session from './util/Session';
 
-import IGeneratorOpts from './types/IGeneratorOpts';
+import { IGeneratorOpts } from './types/IGeneratorOpts';
 
 
 class Generator {
@@ -18,12 +19,10 @@ class Generator {
         const typeDescription = await Parserr.parse(
             Session.getTParserrOpts()
         );
-        console.error(JSON.stringify(typeDescription));
 
-        const schema = Schema.transform(typeDescription);
-        console.error(JSON.stringify(schema));
+        const schemaOpts = SchemaBuilder.transform(typeDescription);
 
-        await Collection.generate(schema);
+        await Collection.generate(_.map(schemaOpts, 'schema'));
     }
 
 }

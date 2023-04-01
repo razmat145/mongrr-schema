@@ -2,17 +2,16 @@
 import { Db } from 'mongodb';
 import { IParserOpts } from 'tparserr';
 
-type TParserOptsPaths = Pick<IParserOpts,
+export type TParserInheritedOpts = Pick<IParserOpts,
     'files'
     | 'useRelativePaths'
     | 'callerBaseDir'
     | 'targetDir'
-    | 'includeOnlyDefaultExports'
+    | 'includeOnlyExports'
     | 'includeNestedClassNames'
+    | 'enableDecorators'
 >;
 
-interface IGeneratorOpts extends TParserOptsPaths {
+export interface IGeneratorOpts extends TParserInheritedOpts {
     mongoDb: Db;
 }
-
-export default IGeneratorOpts;
