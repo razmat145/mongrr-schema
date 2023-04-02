@@ -49,6 +49,19 @@
                         "direction": "desc"
                     }
                 ]
+            },
+            {
+                "name": "MyUsers_name_address",
+                "index": [
+                    {
+                        "property": "name",
+                        "direction": "asc"
+                    },
+                    {
+                        "property": "address",
+                        "direction": "desc"
+                    }
+                ]
             }
         ]
     }

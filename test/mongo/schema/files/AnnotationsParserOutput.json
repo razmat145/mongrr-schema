@@ -42,6 +42,18 @@
         },
         "annotations": [
             {
+                "name": "CompoundIndex",
+                "args": [
+                    [
+                        "name"
+                    ],
+                    [
+                        "address",
+                        "desc"
+                    ]
+                ]
+            },
+            {
                 "name": "CollectionName",
                 "args": [
                     "MyUsers"
