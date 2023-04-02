@@ -4,26 +4,32 @@ import _ from 'lodash';
 import { ITypeDescription } from 'tparserr';
 
 import Property from './util/Property';
+import Decorator from './Decorator';
 
 import ISchemaObject from '../../types/ISchemaObject';
-import { ISchemaOpts } from '../../types/SchemaOpts';
+import { ISchemaOpts, ISchemaOptIndex } from '../../types/SchemaOpts';
 
 
 class Transform {
 
+    private indexes: Array<ISchemaOptIndex> = [];
+
     public transform(typeDescription: ITypeDescription): Partial<ISchemaOpts> {
+        this.indexes = [];
+
         return {
-            schema: this.transformToSchema(typeDescription)
+            schema: this.transformToSchema(typeDescription),
+            indexes: this.indexes
         };
     }
 
-    private transformToSchema(typeDescription: ITypeDescription): ISchemaObject {
+    private transformToSchema(typeDescription: ITypeDescription, basePath = ''): ISchemaObject {
         switch (true) {
             case Property.isPrimitive(typeDescription):
                 return Property.transformToPrimitiveSchema(typeDescription);
 
             case typeDescription.type === 'object':
-                return this.transformToObjectSchema(typeDescription);
+                return this.transformToObjectSchema(typeDescription, basePath);
 
             case typeDescription.type === 'array':
                 return this.transformToArraySchema(typeDescription);
@@ -33,25 +39,41 @@ class Transform {
         }
     }
 
-    private transformToObjectSchema(typeDescription: ITypeDescription): ISchemaObject {
+    private transformToObjectSchema(typeDescription: ITypeDescription, basePath = ''): ISchemaObject {
         return {
             bsonType: 'object',
             title: typeDescription?.name,
-            properties: this.transformProperties(typeDescription.properties),
+            properties: this.transformProperties(typeDescription.properties, basePath),
             required: Property.extractRequired(typeDescription.properties)
         };
     }
 
-    private transformProperties(typeDescriptionProperties?: Record<string, ITypeDescription>): Record<string, ISchemaObject> {
+    private transformProperties(typeDescriptionProperties?: Record<string, ITypeDescription>, basePath = ''): Record<string, ISchemaObject> {
         const schemaKeys = {};
 
         for (const key in typeDescriptionProperties) {
             _.assign(schemaKeys, {
-                [key]: this.transformToSchema(typeDescriptionProperties[key])
+                [key]: this.transformToSchema(typeDescriptionProperties[key], basePath ? `${basePath}.${key}` : key)
             });
+
+            this.extractIndexDecorators(typeDescriptionProperties[key], key, basePath);
         }
 
         return schemaKeys;
+    }
+
+    private extractIndexDecorators(typeDescription: ITypeDescription, key: string, basePath: string) {
+        const index = Decorator.extractPropertyIndexDecorators(
+            basePath ? `${basePath}.${key}` : key,
+            typeDescription
+        );
+
+        if (!_.isEmpty(index)) {
+            this.indexes.push({
+                name: basePath ? `${basePath}.${key}` : key,
+                index: [index]
+            });
+        }
     }
 
     private transformToArraySchema(typeDescription: ITypeDescription): ISchemaObject {

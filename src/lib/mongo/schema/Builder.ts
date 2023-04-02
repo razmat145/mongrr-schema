@@ -1,10 +1,12 @@
 
+import _ from 'lodash';
+
 import { ITypeDescription } from 'tparserr';
 
 import Transform from './Transform';
 import Decorator from './Decorator';
 
-import { ISchemaOpts } from '../../types/SchemaOpts';
+import { ISchemaOptIndex, ISchemaOpts } from '../../types/SchemaOpts';
 
 
 class Builder {
@@ -13,12 +15,21 @@ class Builder {
         const schemaOpts: Array<ISchemaOpts> = [];
 
         for (const typeDescription of typeDescriptions) {
-            const { schema } = Transform.transform(typeDescription);
+            const { schema, indexes } = Transform.transform(typeDescription);
 
-            schemaOpts.push({
-                collectionName: this.extractCollectionName(typeDescription),
+            const collectionName = this.extractCollectionName(typeDescription);
+            const collectionSchemaOpts = {
+                collectionName,
                 schema
-            });
+            };
+
+            if (!_.isEmpty(indexes)) {
+                _.assign(collectionSchemaOpts, {
+                    indexes: this.prepareIndexes(collectionName, indexes)
+                });
+            }
+
+            schemaOpts.push(collectionSchemaOpts);
         }
 
         return schemaOpts;
@@ -28,6 +39,13 @@ class Builder {
         const userEnforcedName = Decorator.extractDecoratedCollectionName(typeDescription);
 
         return userEnforcedName || typeDescription.name;
+    }
+
+    private prepareIndexes(collectionName: string, indexes: ISchemaOptIndex[]) {
+        return _.map(indexes, indexDef => {
+            indexDef.name = `${collectionName}_${indexDef.name}`;
+            return indexDef;
+        });
     }
 
 }

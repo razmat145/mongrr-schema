@@ -3,6 +3,8 @@ import _ from 'lodash';
 
 import { ITypeDescription, IAnnotation } from 'tparserr';
 
+import { IIndexDescription } from '../../types/Index';
+
 
 class Decorator {
 
@@ -11,6 +13,17 @@ class Decorator {
 
         return !_.isEmpty(collectionNameAnnot)
             ? this.extractSingleValue(collectionNameAnnot)
+            : null;
+    }
+
+    public extractPropertyIndexDecorators(property: string, typeDescription: ITypeDescription): IIndexDescription {
+        const indexAnnot = this.getByName(typeDescription.annotations, 'Index');
+
+        return !_.isEmpty(indexAnnot)
+            ? {
+                property,
+                direction: this.extractSingleValue(indexAnnot) || 'asc'
+            }
             : null;
     }
 

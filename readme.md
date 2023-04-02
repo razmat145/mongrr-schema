@@ -67,19 +67,28 @@ main().catch(console.error);
 ##### Decorators
 Decorators can be used to instruct the generator to make various decisions
 ```typescript
-import { CollectionName } from 'mongrr-schema'
+import { CollectionName, Index } from 'mongrr-schema'
 
 @CollectionName('MyUsers') // instructs the generator to use the specified collection name
 export class User {
     id: number;
 
+    @Index() // instructs the generator to create an ascending index on 'name' path
+    name: string;
+
     phone?: Array<string>;
 
     address: string;
 
+    @Index('desc') // instructs the generator to create an descending index on 'active' path
     active: boolean;
 }
 ```
+With created schema
+![Example Schema](img/exampleSchema.jpg)
+
+And created indexes
+![Example Indexes](img/exampleIndexes.jpg)
 
 ### Configuration
 FilePath opts are inherited by tparserr dependency - see https://github.com/razmat145/tparserr#configuration for more info 
