@@ -17,6 +17,7 @@ npm install --save mongrr-schema
 
 ### Usage
 
+##### Basic
 Given a target file
 ```typescript
 // ../targetFiles/User.ts
@@ -56,14 +57,28 @@ async function main() {
     await Generator.generate({
         files: ['../targetFiles/User.ts'],
         callerBaseDir: __dirname,
-        includeNestedClassNames: true,
-        includeOnlyDefaultExports: true,
         mongoDb: client.db(databaseName)
     });
 
 }
 
 main().catch(console.error);
+```
+##### Decorators
+Decorators can be used to instruct the generator to make various decisions
+```typescript
+import { CollectionName } from 'mongrr-schema'
+
+@CollectionName('MyUsers') // instructs the generator to use the specified collection name
+export class User {
+    id: number;
+
+    phone?: Array<string>;
+
+    address: string;
+
+    active: boolean;
+}
 ```
 
 ### Configuration
@@ -74,15 +89,17 @@ type TParserOptsPaths = Pick<IParserOpts,
     | 'useRelativePaths'
     | 'callerBaseDir'
     | 'targetDir'
-    | 'includeOnlyDefaultExports'
+    | 'includeOnlyExports'
     | 'includeNestedClassNames'
+    | 'enableDecorators'
 >;
 
 interface IGeneratorOpts extends TParserOptsPaths {
     mongoDb: Db; // MongoDB Db type
 }
 ```
-
+#### (Known) Limitations
+- some file pathing limitations are inherited from `tparserr` - see https://github.com/razmat145/tparserr#known-limitations
 
 ## License
 This library is licensed under the Apache 2.0 License

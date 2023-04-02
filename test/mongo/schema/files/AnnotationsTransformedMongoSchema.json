@@ -1,0 +1,31 @@
+[
+    {
+        "collectionName": "MyUsers",
+        "schema": {
+            "bsonType": "object",
+            "title": "User",
+            "properties": {
+                "id": {
+                    "bsonType": "number"
+                },
+                "phone": {
+                    "bsonType": "array",
+                    "items": {
+                        "bsonType": "string"
+                    }
+                },
+                "address": {
+                    "bsonType": "string"
+                },
+                "active": {
+                    "bsonType": "bool"
+                }
+            },
+            "required": [
+                "id",
+                "address",
+                "active"
+            ]
+        }
+    }
+]

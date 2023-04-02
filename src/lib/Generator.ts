@@ -1,29 +1,26 @@
 
 import { Parserr } from 'tparserr';
 
-import Schema from './mongo/Schema';
-import Collection from './mongo/Collection';
+import SchemaBuilder from './mongo/schema/Builder';
+import DatabaseGenerator from './mongo/database/Generator';
 
 import Session from './util/Session';
 
-import IGeneratorOpts from './types/IGeneratorOpts';
+import { IGeneratorOpts } from './types/IGeneratorOpts';
 
 
 class Generator {
 
     public async generate(opts: IGeneratorOpts) {
-
         Session.setConfigOpts(opts);
 
         const typeDescription = await Parserr.parse(
             Session.getTParserrOpts()
         );
-        console.error(JSON.stringify(typeDescription));
 
-        const schema = Schema.transform(typeDescription);
-        console.error(JSON.stringify(schema));
+        const schemaOpts = SchemaBuilder.transform(typeDescription);
 
-        await Collection.generate(schema);
+        await DatabaseGenerator.generate(schemaOpts);
     }
 
 }
