@@ -85,10 +85,10 @@ export class User {
 }
 ```
 With created schema
-![Example Schema](img/exampleSchema.jpg)
+![Example Schema](./img/exampleSchema.png)
 
 And created indexes
-![Example Indexes](img/exampleIndexes.jpg)
+![Example Indexes](./img/exampleIndexes.png)
 
 ### Configuration
 FilePath opts are inherited by tparserr dependency - see https://github.com/razmat145/tparserr#configuration for more info 
