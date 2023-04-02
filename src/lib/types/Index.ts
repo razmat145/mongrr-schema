@@ -14,3 +14,5 @@ export interface IMongoIndex {
 
     name: string;
 }
+
+export type TCompoundIndexInputDefinition = [string, TIndexDirection?];

@@ -23,9 +23,19 @@ class Builder {
                 schema
             };
 
-            if (!_.isEmpty(indexes)) {
+            const compoundIndexes = this.extractCompoundIndexes(collectionName, typeDescription);
+            if (!_.isEmpty(indexes) || !_.isEmpty(compoundIndexes)) {
+                let allIndexes = [];
+
+                if (!_.isEmpty(indexes)) {
+                    allIndexes = [...this.prepareIndexes(collectionName, indexes)];
+                }
+                if (!_.isEmpty(compoundIndexes)) {
+                    allIndexes = [...allIndexes, ...compoundIndexes];
+                }
+
                 _.assign(collectionSchemaOpts, {
-                    indexes: this.prepareIndexes(collectionName, indexes)
+                    indexes: allIndexes
                 });
             }
 
@@ -39,6 +49,12 @@ class Builder {
         const userEnforcedName = Decorator.extractDecoratedCollectionName(typeDescription);
 
         return userEnforcedName || typeDescription.name;
+    }
+
+    private extractCompoundIndexes(collectionName: string, typeDescription: ITypeDescription) {
+        const compountIndexes = Decorator.extractCompoundIndexes(collectionName, typeDescription);
+
+        return !_.isEmpty(compountIndexes) ? compountIndexes : null;
     }
 
     private prepareIndexes(collectionName: string, indexes: ISchemaOptIndex[]) {

@@ -67,8 +67,12 @@ main().catch(console.error);
 ##### Decorators
 Decorators can be used to instruct the generator to make various decisions
 ```typescript
-import { CollectionName, Index } from 'mongrr-schema'
+import { CollectionName, Index, CompoundIndex } from 'mongrr-schema'
 
+@CompoundIndex(
+    ['name'],
+    ['address', 'desc']
+) // instructs the generator to use a compound index on name-asc and address-desc
 @CollectionName('MyUsers') // instructs the generator to use the specified collection name
 export class User {
     id: number;

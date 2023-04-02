@@ -63,7 +63,7 @@ class Transform {
     }
 
     private extractIndexDecorators(typeDescription: ITypeDescription, key: string, basePath: string) {
-        const index = Decorator.extractPropertyIndexDecorators(
+        const index = Decorator.extractPropertyIndex(
             basePath ? `${basePath}.${key}` : key,
             typeDescription
         );
