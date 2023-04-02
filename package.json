@@ -1,6 +1,6 @@
 {
   "name": "mongrr-schema",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "description": "Mongo Schema Generator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

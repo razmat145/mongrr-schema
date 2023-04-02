@@ -94,7 +94,7 @@ With created schema
 
 And created indexes   
 
-![Example Indexes](./img/exampleIndexes2.png)
+![Example Indexes](./img/exampleIndexes3.png)
 
 ### Configuration
 FilePath opts are inherited by tparserr dependency - see https://github.com/razmat145/tparserr#configuration for more info 
