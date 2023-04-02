@@ -84,10 +84,12 @@ export class User {
     active: boolean;
 }
 ```
-With created schema
+With created schema   
+
 ![Example Schema](./img/exampleSchema.png)
 
-And created indexes
+And created indexes   
+
 ![Example Indexes](./img/exampleIndexes.png)
 
 ### Configuration
