@@ -12,6 +12,15 @@
     "rules": {
         "@typescript-eslint/no-empty-interface": [
             1
+        ],
+        "@typescript-eslint/ban-types": [
+            "error",
+            {
+                "types": {
+                    "Function": false
+                },
+                "extendDefaults": true
+            }
         ]
     }
 }

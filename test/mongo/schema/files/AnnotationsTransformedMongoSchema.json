@@ -1,5 +1,6 @@
 [
     {
+        "collectionName": "MyUsers",
         "schema": {
             "bsonType": "object",
             "title": "User",
@@ -14,23 +15,7 @@
                     }
                 },
                 "address": {
-                    "bsonType": "object",
-                    "title": "Address",
-                    "properties": {
-                        "street": {
-                            "bsonType": "string"
-                        },
-                        "county": {
-                            "bsonType": "string"
-                        },
-                        "flatNumber": {
-                            "bsonType": "number"
-                        }
-                    },
-                    "required": [
-                        "street",
-                        "county"
-                    ]
+                    "bsonType": "string"
                 },
                 "active": {
                     "bsonType": "bool"
