@@ -37,7 +37,7 @@ describe('mongo.database.Collection', () => {
         jest.clearAllMocks();
     });
 
-    describe('existingCollections', () => {
+    describe('initialisation', () => {
 
         it('should load and clear the existing collections via the util methods', async () => {
 

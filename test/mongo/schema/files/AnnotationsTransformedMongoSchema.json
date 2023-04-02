@@ -8,6 +8,9 @@
                 "id": {
                     "bsonType": "number"
                 },
+                "name": {
+                    "bsonType": "string"
+                },
                 "phone": {
                     "bsonType": "array",
                     "items": {
@@ -23,9 +26,30 @@
             },
             "required": [
                 "id",
+                "name",
                 "address",
                 "active"
             ]
-        }
+        },
+        "indexes": [
+            {
+                "name": "MyUsers_name",
+                "index": [
+                    {
+                        "property": "name",
+                        "direction": "asc"
+                    }
+                ]
+            },
+            {
+                "name": "MyUsers_active",
+                "index": [
+                    {
+                        "property": "active",
+                        "direction": "desc"
+                    }
+                ]
+            }
+        ]
     }
 ]

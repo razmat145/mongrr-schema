@@ -7,6 +7,15 @@
                 "type": "number",
                 "required": true
             },
+            "name": {
+                "type": "string",
+                "required": true,
+                "annotations": [
+                    {
+                        "name": "Index"
+                    }
+                ]
+            },
             "phone": {
                 "type": "array",
                 "items": {
@@ -20,7 +29,15 @@
             },
             "active": {
                 "type": "boolean",
-                "required": true
+                "required": true,
+                "annotations": [
+                    {
+                        "name": "Index",
+                        "args": [
+                            "desc"
+                        ]
+                    }
+                ]
             }
         },
         "annotations": [
