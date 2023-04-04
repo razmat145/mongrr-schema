@@ -1,6 +1,8 @@
 
 import { ITypeDescription } from 'tparserr';
 
+import Decorator from './Decorator';
+
 import ISchemaObject from '../../../types/ISchemaObject';
 
 
@@ -17,13 +19,34 @@ class Property {
                 return { bsonType: 'string' };
 
             case 'number':
-                return { bsonType: 'number' };
+                return this.generateNumberPrimitiveSchema(typeDescription);
+
 
             case 'Date':
                 return { bsonType: 'date' };
 
             default:
                 throw new Error(`Unknown or not yet implemented primitive type: ${typeDescription.type}`);
+        }
+    }
+
+    private generateNumberPrimitiveSchema(typeDescription: ITypeDescription): ISchemaObject {
+        // cases fall based on type casting as much as possible
+        switch (true) {
+            case Decorator.hasDecorator(typeDescription, 'Long'):
+                return { bsonType: 'long' };
+
+            case Decorator.hasDecorator(typeDescription, 'Decimal'):
+                return { bsonType: 'decimal' };
+
+            case Decorator.hasDecorator(typeDescription, 'Double'):
+                return { bsonType: 'double' };
+
+            case Decorator.hasDecorator(typeDescription, 'Int'):
+                return { bsonType: 'int' };
+
+            default:
+                return { bsonType: 'number' };
         }
     }
 

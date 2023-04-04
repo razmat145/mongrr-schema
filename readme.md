@@ -7,7 +7,7 @@ Typescript MongoDB Schema Generator
 Generate and keep your MongoDB Schema Validation up-to-date based on your types!        
 
 Types are/should be always up-to-date in order to enable proper Typescript usage.      
-This library' aim is to automate the mundayne task of keeping the MongoDB Schema Validation in sync with your API or various services types. 
+This library' aim is to automate the mundane task of keeping the MongoDB Schema Validation in sync with your API or various services types. 
 
 ### Installing
 
@@ -65,7 +65,7 @@ async function main() {
 main().catch(console.error);
 ```
 ##### Decorators
-Decorators can be used to instruct the generator to make various decisions
+Decorators can be used to incluence the MongoDB schema generation by applying various modifiers or by outright changing the behaviour completely.
 ```typescript
 import { CollectionName, Index, CompoundIndex } from 'mongrr-schema'
 
@@ -86,15 +86,36 @@ export class User {
 
     @Index('desc') // instructs the generator to create an descending index on 'active' path
     active: boolean;
+
+    @Int()
+    age: number;
+
+    @Double()
+    balance: number;
 }
 ```
 With created schema   
 
-![Example Schema](./img/exampleSchema.png)
+![Example Schema](./img/exampleSchema2.png)
 
 And created indexes   
 
 ![Example Indexes](./img/exampleIndexes3.png)
+
+### Supported Decorators
+##### Class Decorators
+- `@CollectionName(name: string)` - using the specified name when creating/updating the collection schema
+- `@CompoundIndex(..args: Array<[propertyPath, 'asc' | 'desc']>)` - creating a compound index on the `[path, direction]` provided arguments
+ 
+##### Property Decorators
+###### Generic
+- `@Index()` - creating an index on decorated property
+
+###### Number Type
+- `@Double()` - modifier that marks the `number` as a `double` BSON type
+- `@Long()` - modifier that marks the `number` as a `long` BSON type
+- `@Int()` - modifier that marks the `number` as a `int` BSON type
+- `@Decimal()` - modifier that marks the `number` as a `decimal` BSON type
 
 ### Configuration
 FilePath opts are inherited by tparserr dependency - see https://github.com/razmat145/tparserr#configuration for more info 
@@ -113,6 +134,7 @@ interface IGeneratorOpts extends TParserOptsPaths {
     mongoDb: Db; // MongoDB Db type
 }
 ```
+
 #### (Known) Limitations
 - some file pathing limitations are inherited from `tparserr` - see https://github.com/razmat145/tparserr#known-limitations
 

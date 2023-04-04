@@ -3,8 +3,8 @@ import _ from 'lodash';
 
 import { ITypeDescription, IAnnotation } from 'tparserr';
 
-import { IIndexDescription, TIndexDirection } from '../../types/Index';
-import { ISchemaOptIndex } from '../../types/SchemaOpts';
+import { IIndexDescription, TIndexDirection } from '../../../types/Index';
+import { ISchemaOptIndex } from '../../../types/SchemaOpts';
 
 
 class Decorator {
@@ -41,12 +41,16 @@ class Decorator {
             : null;
     }
 
+    public hasDecorator(typeDescription: ITypeDescription, decoratorName: string): boolean {
+        const annotation = this.getSingleByName(typeDescription.annotations, decoratorName);
+
+        return !_.isEmpty(annotation);
+    }
+
     private reduceCompoundIndexName(baseName: string, args: Array<[string, TIndexDirection?]>): string {
         return _.reduce(
             args,
-            (acc, arg) => {
-                return acc + '_' + arg[0];
-            },
+            (acc, arg) => acc + '_' + arg[0],
             baseName
         );
     }

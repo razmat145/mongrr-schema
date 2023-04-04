@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { ITypeDescription } from 'tparserr';
 
 import Transform from './Transform';
-import Decorator from './Decorator';
+import Decorator from './util/Decorator';
 
 import { ISchemaOptIndex, ISchemaOpts } from '../../types/SchemaOpts';
 
