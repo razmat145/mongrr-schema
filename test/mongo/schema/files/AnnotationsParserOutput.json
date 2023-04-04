@@ -4,7 +4,7 @@
         "type": "object",
         "properties": {
             "id": {
-                "type": "number",
+                "type": "string",
                 "required": true
             },
             "name": {
@@ -13,6 +13,12 @@
                 "annotations": [
                     {
                         "name": "Index"
+                    },
+                    {
+                        "name": "MinLength",
+                        "args": [
+                            6
+                        ]
                     }
                 ]
             },
@@ -25,7 +31,15 @@
             },
             "address": {
                 "type": "string",
-                "required": true
+                "required": true,
+                "annotations": [
+                    {
+                        "name": "MaxLength",
+                        "args": [
+                            50
+                        ]
+                    }
+                ]
             },
             "active": {
                 "type": "boolean",
@@ -45,6 +59,12 @@
                 "annotations": [
                     {
                         "name": "Int"
+                    },
+                    {
+                        "name": "Minimum",
+                        "args": [
+                            18
+                        ]
                     }
                 ]
             },
