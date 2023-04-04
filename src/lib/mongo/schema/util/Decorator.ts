@@ -47,6 +47,14 @@ class Decorator {
         return !_.isEmpty(annotation);
     }
 
+    public getSingleValueIfExists(typeDescription: ITypeDescription, decoratorName: string) {
+        const annotation = this.getSingleByName(typeDescription.annotations, decoratorName);
+
+        return !_.isEmpty(annotation)
+            ? this.extractSingleValue(annotation)
+            : null;
+    }
+
     private reduceCompoundIndexName(baseName: string, args: Array<[string, TIndexDirection?]>): string {
         return _.reduce(
             args,
