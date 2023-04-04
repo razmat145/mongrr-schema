@@ -38,6 +38,24 @@
                         ]
                     }
                 ]
+            },
+            "age": {
+                "type": "number",
+                "required": true,
+                "annotations": [
+                    {
+                        "name": "Int"
+                    }
+                ]
+            },
+            "balance": {
+                "type": "number",
+                "required": true,
+                "annotations": [
+                    {
+                        "name": "Double"
+                    }
+                ]
             }
         },
         "annotations": [

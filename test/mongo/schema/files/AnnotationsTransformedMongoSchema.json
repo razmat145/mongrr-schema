@@ -22,13 +22,21 @@
                 },
                 "active": {
                     "bsonType": "bool"
+                },
+                "age": {
+                    "bsonType": "int"
+                },
+                "balance": {
+                    "bsonType": "double"
                 }
             },
             "required": [
                 "id",
                 "name",
                 "address",
-                "active"
+                "active",
+                "age",
+                "balance"
             ]
         },
         "indexes": [
