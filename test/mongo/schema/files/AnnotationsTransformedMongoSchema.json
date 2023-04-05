@@ -10,24 +10,29 @@
                 },
                 "name": {
                     "bsonType": "string",
-                    "minLength": 6
+                    "minLength": 6,
+                    "description": "Name of the user, it's required and has minimum 6 chars"
                 },
                 "phone": {
                     "bsonType": "array",
                     "items": {
                         "bsonType": "string"
-                    }
+                    },
+                    "minItems": 1,
+                    "uniqueItems": true
                 },
                 "address": {
                     "bsonType": "string",
-                    "maxLength": 50
+                    "maxLength": 50,
+                    "description": "Adress of the user, it's required and has a maximum of 50 chars"
                 },
                 "active": {
                     "bsonType": "bool"
                 },
                 "age": {
                     "bsonType": "int",
-                    "minimum": 18
+                    "minimum": 18,
+                    "description": "Age of the user, it's required and must be over 18"
                 },
                 "balance": {
                     "bsonType": "double"
@@ -36,11 +41,13 @@
             "required": [
                 "id",
                 "name",
+                "phone",
                 "address",
                 "active",
                 "age",
                 "balance"
-            ]
+            ],
+            "description": "My User entity XYZ"
         },
         "indexes": [
             {

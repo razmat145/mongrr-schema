@@ -1,6 +1,6 @@
 {
   "name": "mongrr-schema",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Mongo Schema Generator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
   "dependencies": {
     "lodash": "^4.17.21",
     "mongodb": "^5.1.0",
-    "tparserr": "^1.1.6"
+    "tparserr": "^1.1.7"
   },
   "devDependencies": {
     "@jest/globals": "^29.5.0",

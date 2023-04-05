@@ -7,3 +7,4 @@ export function Index(direction?: TIndexDirection): Function {
 
 export * from './propertyType/Number';
 export * from './propertyType/String';
+export * from './propertyType/Array';
