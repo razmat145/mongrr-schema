@@ -19,6 +19,12 @@
                         "args": [
                             6
                         ]
+                    },
+                    {
+                        "name": "Description",
+                        "args": [
+                            "Name of the user, it's required and has minimum 6 chars"
+                        ]
                     }
                 ]
             },
@@ -27,7 +33,21 @@
                 "items": {
                     "type": "string"
                 },
-                "required": false
+                "required": true,
+                "annotations": [
+                    {
+                        "name": "MinItems",
+                        "args": [
+                            1
+                        ]
+                    },
+                    {
+                        "name": "UniqueItems",
+                        "args": [
+                            true
+                        ]
+                    }
+                ]
             },
             "address": {
                 "type": "string",
@@ -37,6 +57,12 @@
                         "name": "MaxLength",
                         "args": [
                             50
+                        ]
+                    },
+                    {
+                        "name": "Description",
+                        "args": [
+                            "Adress of the user, it's required and has a maximum of 50 chars"
                         ]
                     }
                 ]
@@ -65,6 +91,12 @@
                         "args": [
                             18
                         ]
+                    },
+                    {
+                        "name": "Description",
+                        "args": [
+                            "Age of the user, it's required and must be over 18"
+                        ]
                     }
                 ]
             },
@@ -79,6 +111,12 @@
             }
         },
         "annotations": [
+            {
+                "name": "Description",
+                "args": [
+                    "My User entity XYZ"
+                ]
+            },
             {
                 "name": "CompoundIndex",
                 "args": [

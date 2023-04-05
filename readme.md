@@ -65,7 +65,7 @@ async function main() {
 main().catch(console.error);
 ```
 ##### Decorators
-Decorators can be used to incluence the MongoDB schema generation by applying various modifiers or by outright changing the behaviour completely.
+Decorators can be used to incluence the MongoDB schema generation by applying various modifiers or by outright changing the behaviour completely.   
 ```typescript
 import {
     CollectionName,
@@ -75,9 +75,13 @@ import {
     Double,
     Minimum,
     MinLength,
-    MaxLength
+    MaxLength,
+    Description,
+    MinItems,
+    UniqueItems
 } from 'mongrr-schema'
 
+@Description('My User entity XYZ')
 @CompoundIndex(
     ['name'],
     ['address', 'desc']
@@ -88,11 +92,15 @@ export class User {
 
     @Index()
     @MinLength(6)
+    @Description(`Name of the user, it's required and has minimum 6 chars`)
     name: string;
 
-    phone?: Array<string>;
+    @MinItems(1)
+    @UniqueItems(true)
+    phone: Array<string>;
 
     @MaxLength(50)
+    @Description(`Adress of the user, it's required and has a maximum of 50 chars`)
     address: string;
 
     @Index('desc')
@@ -100,6 +108,7 @@ export class User {
 
     @Int()
     @Minimum(18)
+    @Description(`Age of the user, it's required and must be over 18`)
     age: number;
 
     @Double()
@@ -108,14 +117,16 @@ export class User {
 ```
 With created schema   
 
-![Example Schema](./img/exampleSchema3.png)
+![Example Schema](./img/exampleSchema4.png)
 
 And created indexes   
 
 ![Example Indexes](./img/exampleIndexes3.png)
 
 ### Supported Decorators
-Decorator naming aims to stay as close to MongoDB docs/namings as possible (where possible) - the only exception is them being `@CapitalCamelCased`
+Decorator naming aims to stay as close to MongoDB docs/namings as possible (where possible) - the only exception is them being `@CapitalCamelCased`   
+##### Generic Decorators
+- `@Description` - attaches description metadata to classes and properties
 ##### Class Decorators
 - `@CollectionName(name: string)` - using the specified name when creating/updating the collection schema
 - `@CompoundIndex(..args: Array<[propertyPath, 'asc' | 'desc']>)` - creating a compound index on the `[path, direction]` provided arguments
@@ -134,7 +145,10 @@ Decorator naming aims to stay as close to MongoDB docs/namings as possible (wher
 ###### String Type
 - `@MinLength(minLength: number)` - modifier that enforces the `minLength` value
 - `@MaxLength(maxLength: number)` - modifiers that enforces the `maxLength` value
-
+###### Array Type
+- `@MinItems(minItems: number)` - modifier that enforces the length of the array to the specified `minItems` value
+- `@MaxItems(maxItems: number)` -  modifier that enforces the length of the array to the specified `maxItems` value
+- `@UniqueItems(hasUniqueItems: boolean)` - modifier that enforces array item uniqueness
 
 ### Configuration
 FilePath opts are inherited by tparserr dependency - see https://github.com/razmat145/tparserr#configuration for more info 

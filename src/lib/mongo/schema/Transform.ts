@@ -24,19 +24,29 @@ class Transform {
     }
 
     private transformToSchema(typeDescription: ITypeDescription, basePath = ''): ISchemaObject {
+        const description = Decorator.getSingleValueIfExists(typeDescription, 'Description');
+
+        let base;
         switch (true) {
             case Property.isPrimitive(typeDescription):
-                return Property.transformToPrimitiveSchema(typeDescription);
+                base = Property.transformToPrimitiveSchema(typeDescription);
+                break;
 
             case typeDescription.type === 'object':
-                return this.transformToObjectSchema(typeDescription, basePath);
+                base = this.transformToObjectSchema(typeDescription, basePath);
+                break;
 
             case typeDescription.type === 'array':
-                return this.transformToArraySchema(typeDescription);
+                base = this.transformToArraySchema(typeDescription);
+                break;
 
             default:
                 throw new Error(`Unknown or not yet implemented type description type: ${typeDescription.type}`);
         }
+
+        description && _.assign(base, { description });
+
+        return base;
     }
 
     private transformToObjectSchema(typeDescription: ITypeDescription, basePath = ''): ISchemaObject {
@@ -86,6 +96,14 @@ class Transform {
                 items: this.transformToSchema(typeDescription.items)
             });
         }
+
+        const minItems = Decorator.getSingleValueIfExists(typeDescription, 'MinItems');
+        minItems && _.assign(base, { minItems });
+        const maxItems = Decorator.getSingleValueIfExists(typeDescription, 'MaxItems');
+        maxItems && _.assign(base, { maxItems });
+
+        const uniqueItems = Decorator.getSingleValueIfExists(typeDescription, 'UniqueItems');
+        uniqueItems && _.assign(base, { uniqueItems });
 
         return base;
     }
