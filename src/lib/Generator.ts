@@ -12,7 +12,7 @@ import { IGeneratorOpts } from './types/IGeneratorOpts';
 class Generator {
 
     public async generate(opts: IGeneratorOpts) {
-        Session.setConfigOpts(opts);
+        await Session.setConfigOpts(opts);
 
         const typeDescription = await Parserr.parse(
             Session.getTParserrOpts()
