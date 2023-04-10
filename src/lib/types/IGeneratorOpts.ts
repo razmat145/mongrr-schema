@@ -10,6 +10,7 @@ export type TParserInheritedOpts = Pick<IParserOpts,
     | 'includeOnlyExports'
     | 'includeNestedClassNames'
     | 'enableDecorators'
+    | 'enableSourceFilePathing'
 >;
 
 export interface IGeneratorOpts extends TParserInheritedOpts {

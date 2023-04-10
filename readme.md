@@ -20,7 +20,7 @@ npm install --save mongrr-schema
 ##### Basic
 Given a target file
 ```typescript
-// ../targetFiles/User.ts
+// ./lib/models/User.ts
 export default class User {
     id: number;
 
@@ -48,7 +48,7 @@ import { Generator } from 'mongrr-schema';
 async function main() {
 
     await Generator.generate({
-        files: ['../targetFiles/User.ts'],
+        files: ['./lib/models/User.ts'],
         callerBaseDir: __dirname,
         connectionString: 'mongodb://localhost:27017', // actual mongodb conn string
         databaseName: 'myExampleDb' // target db to use
@@ -167,9 +167,6 @@ interface IGeneratorOpts extends TParserOptsPaths {
     mongoDb?: Db; // MongoDB (database ref) Db type
 }
 ```
-
-#### (Known) Limitations
-- some file pathing limitations are inherited from `tparserr` - see https://github.com/razmat145/tparserr#known-limitations
 
 ## License
 This library is licensed under the Apache 2.0 License
