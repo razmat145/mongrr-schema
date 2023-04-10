@@ -47,7 +47,8 @@ class Session {
             'targetDir',
             'includeOnlyExports',
             'includeNestedClassNames',
-            'enableDecorators'
+            'enableDecorators',
+            'enableSourceFilePathing'
         ]);
     }
 
@@ -55,7 +56,8 @@ class Session {
         return {
             includeOnlyExports: true,
             includeNestedClassNames: true,
-            enableDecorators: true
+            enableDecorators: true,
+            enableSourceFilePathing: true
         };
     }
 
