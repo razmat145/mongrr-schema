@@ -43,21 +43,15 @@ class Address {
 Simple generation e.g.
 ```typescript
 // index.ts
-import { MongoClient } from 'mongodb';
-
 import { Generator } from 'mongrr-schema';
 
 async function main() {
 
-    const client = new MongoClient('mongodb://localhost:27017'); // actual mongodb connString
-    const databaseName = 'myExampleDb'; // target database
-
-    await client.connect();
-
     await Generator.generate({
         files: ['../targetFiles/User.ts'],
         callerBaseDir: __dirname,
-        mongoDb: client.db(databaseName)
+        connectionString: 'mongodb://localhost:27017', // actual mongodb conn string
+        databaseName: 'myExampleDb' // target db to use
     });
 
 }
@@ -164,7 +158,13 @@ type TParserOptsPaths = Pick<IParserOpts,
 >;
 
 interface IGeneratorOpts extends TParserOptsPaths {
-    mongoDb: Db; // MongoDB Db type
+    // requires either connection details
+    connectionString?: string; // mongodb connection string
+
+    databaseName?: string; // database name to create/use
+
+    // OR
+    mongoDb?: Db; // MongoDB (database ref) Db type
 }
 ```
 

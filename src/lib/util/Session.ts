@@ -4,6 +4,8 @@ import { Db } from 'mongodb';
 
 import { IParserOpts } from 'tparserr';
 
+import Connection from './Connection';
+
 import { IGeneratorOpts } from '../types/IGeneratorOpts';
 
 
@@ -11,7 +13,9 @@ class Session {
 
     private opts: IGeneratorOpts;
 
-    public setConfigOpts(opts: IGeneratorOpts) {
+    public async setConfigOpts(opts: IGeneratorOpts) {
+        await Connection.setup(opts);
+
         this.opts = _.assign(this.getConfigDefaults(), opts);
     }
 
@@ -32,7 +36,7 @@ class Session {
     }
 
     public getDatabase(): Db {
-        return this.getConfigItem('mongoDb');
+        return Connection.getDatabase();
     }
 
     public getTParserrOpts(): IParserOpts {

@@ -13,5 +13,9 @@ export type TParserInheritedOpts = Pick<IParserOpts,
 >;
 
 export interface IGeneratorOpts extends TParserInheritedOpts {
-    mongoDb: Db;
+    connectionString?: string;
+
+    databaseName?: string;
+
+    mongoDb?: Db;
 }
