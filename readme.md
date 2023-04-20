@@ -58,8 +58,31 @@ async function main() {
 
 main().catch(console.error);
 ```
+##### Runtime without access to /src type files
+
+###### Using tparserr to generate type description file
+
+tparserr can be installed as dev and attached to build
+```
+npm install --save-dev tparserr
+```
+with e.g. npm script attached to the build
+```
+"build:types": "tparserr generate -f=./src/lib/models/User.ts -o=./schema.json"
+```
+can simply
+```typescript
+await Generator.generateForTypes({
+    connectionString: 'mongodb://localhost:27017', // actual mongodb conn string
+    databaseName: databaseName // target db to use
+}, './schema.json');
+```
+###### Note: to enable decorators and other options - see https://github.com/razmat145/tparserr#configuration
+```
+"build:types": "tparserr generate -f=./src/lib/models/User.ts -o=./schema.json" --includeOnlyExports=true --enableDecorators=true
+```
 ##### Decorators
-Decorators can be used to incluence the MongoDB schema generation by applying various modifiers or by outright changing the behaviour completely.   
+Decorators can be used to influence the MongoDB schema generation by applying various modifiers or by outright changing the behaviour completely.   
 ```typescript
 import {
     CollectionName,
